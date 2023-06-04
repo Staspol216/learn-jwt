@@ -9,11 +9,15 @@ const errorMiddleweare = require('./middleweare/error-middleweare')
 const PORT = process.env.PORT || 9090;
 const app = express();
 
+
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: "http://localhost:3000"
+}));
 app.use('/api', router);
-app.use(errorMiddleweare)
+app.use(errorMiddleweare);
 
 const start = async () => {
     try {
